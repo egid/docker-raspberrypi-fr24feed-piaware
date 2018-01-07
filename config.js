@@ -35,9 +35,9 @@ DefaultZoomLvl   = 7;
 // that location is used and these settings are ignored.
 
 SiteShow    = true;           // true to show a center marker
-SiteLat     = 47;            // position of the marker
-SiteLon     = 2.5;
-SiteName    = "Home"; // tooltip of the marker
+SiteLat     = 32.1234;        // position of the marker
+SiteLon     = -97.9876;
+SiteName    = "Home";         // tooltip of the marker
 
 // -- Marker settings -------------------------------------
 

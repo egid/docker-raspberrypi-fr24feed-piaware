@@ -39,7 +39,7 @@ docker run -it -p 8080:8080 -p 8754:8754 \
 --privileged --device=/dev/bus/usb:/dev/bus/usb \
 --mac-address="ff:ff:ff:ff:ff:ff" \
 -v /absolute/path/to/your/config.js:/usr/lib/fr24/public_html/config.js \
-REPLACE/fr24feed-piaware
+dmorehouse/raspberrypi-flightradar-flightaware-feed
 ```
 ### Check that everything is working
 Goto http://dockerhost:8080/gmap.html (dockerhost is probably localhost).  If you see an error in the bottom left saying "Problem fetching data from dump1090" something isn't working
@@ -62,7 +62,7 @@ Make sure you enter the MAC address of your raspberry pi's active network interf
 ```bash
 docker run -it --privileged -v /dev/bus/usb:/dev/bus/usb \
 --mac-address="ff:ff:ff:ff:ff:ff" \
---entrypoint /fr24feed/fr24feed_armhf/fr24feed REPLACE_WITH_DOCKER_IMAGE --signup
+--entrypoint /fr24feed/fr24feed_armhf/fr24feed dmorehouse/raspberrypi-flightradar-flightaware-feed --signup
 ```
 Enter your email address
 If you do NOT already have a sharing key (which you probably don't) just hit Enter
@@ -81,8 +81,6 @@ Congratulations! You are now registered and ready to share ADS-B data with Fligh
 
 Thank you for supporting Flightradar24! We hope that you will enjoy our Premium services that will be available to you when you become an active feeder.
 ```
-REPLACE_REMOVE Register to https://www.flightradar24.com/share-your-data and get a sharing key.
-
 Make a copy of your 16 character sharing key AND your radar id.  Contrary to the notice they do NOT email either to you.  The sharing key is needed to submit your data, the radar id is needed if you want to look up your stats on the leaderboard.
 
 Download and edit [`fr24feed.ini`](https://raw.githubusercontent.com/dmorehouse/docker-raspberrypi-fr24feed-piaware-dump1090-mutability/master/fr24feed.ini)
@@ -109,9 +107,10 @@ docker run -d -p 8080:8080 -p 8754:8754 \
 -v /path/to/your/piaware.conf:/etc/piaware.conf \
 -v /path/to/your/config.js:/usr/lib/fr24/public_html/config.js \
 -v /path/to/your/fr24feed.ini:/etc/fr24feed.ini \
-REPLACE_IMAGE
+dmorehouse/raspberrypi-flightradar-flightaware-feed
 ```
 Change `--mac-address="ff:ff:ff:ff:ff:ff"` with your own MAC address.  See above for instructions on how to get this.
+*Note Add --restart=always if you want this background container to automatically restart if it dies or if the machine reboots (the docker service must be started which is normally the case on a Raspberry Pi if you set it to automatically login a user to the Desktop or CLI)
 
 
 # Build Docker image yourself

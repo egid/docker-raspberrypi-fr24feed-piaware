@@ -40,18 +40,12 @@ COPY piaware.conf /etc/
 
 # FR24FEED
 WORKDIR /fr24feed
-RUN wget $(wget -qO- http://feed.flightradar24.com/linux | egrep amd64.tgz | awk -F\" '{print $2}') \
-    && tar -xvzf *amd64.tgz
+RUN wget $(wget -qO- http://feed.flightradar24.com/raspberry-pi | egrep -Eo 'https?://[^"]+armhf.tgz' | grep -v _obj_ | head -n 1) \
+    && tar -xvzf *armhf.tgz
 COPY fr24feed.ini /etc/
 
 RUN apt-get update && apt-get install -y supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Add Tini
-ENV TINI_VERSION v0.16.1
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "--"]
 
 EXPOSE 8754 8080 30001 30002 30003 30004 30005 30104 
 

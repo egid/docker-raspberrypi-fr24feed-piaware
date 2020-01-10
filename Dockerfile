@@ -1,4 +1,4 @@
-FROM raspbian:jessie
+FROM raspbian/jessie
  
 RUN apt-get update && \
     apt-get install -y wget libusb-1.0-0-dev pkg-config ca-certificates git-core cmake build-essential --no-install-recommends && \

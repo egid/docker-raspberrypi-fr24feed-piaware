@@ -32,7 +32,7 @@ RUN mkdir /usr/lib/fr24/public_html/data
 # PIAWARE
 WORKDIR /tmp
 RUN apt-get update && \
-    apt-get install sudo build-essential debhelper tcl8.6-dev autoconf python3-dev python-virtualenv libz-dev net-tools tclx8.4 tcllib tcl-tls itcl3 python3-venv dh-systemd init-system-helpers -y 
+    apt-get install sudo build-essential debhelper librtlsdr-dev pkg-config dh-systemd libncurses5-dev libbladerf-dev -y 
 RUN git clone https://github.com/flightaware/piaware_builder.git piaware_builder
 WORKDIR /tmp/piaware_builder
 RUN ./sensible-build.sh jessie && cd package-jessie && dpkg-buildpackage -b && cd .. && dpkg -i piaware_*_*.deb

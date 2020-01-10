@@ -18,14 +18,12 @@ RUN echo 'blacklist dvb_usb_rtl28xxu' > /etc/modprobe.d/raspi-blacklist.conf && 
     ldconfig && \
     rm -rf /tmp/rtl-sdr
 
-# dump1090 + Piaware
-WORKDIR /tmp
-RUN apt-get update && \
-    sudo apt-get install dump1090-fa piaware
-
+# dump1090 + Piaware + supervisor
 COPY piaware.conf /etc/
 
-RUN apt-get update && apt-get install -y supervisor
+WORKDIR /tmp
+RUN apt-get update && \
+    apt-get install -y dump1090-fa piaware supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 

@@ -20,7 +20,7 @@ RUN echo 'blacklist dvb_usb_rtl28xxu' > /etc/modprobe.d/raspi-blacklist.conf && 
 
 # DUMP1090
 WORKDIR /tmp
-RUN git clone https://github.com/mutability/dump1090 && \
+RUN git clone https://github.com/flightaware/dump1090 && \
     cd dump1090 && \
     make && mkdir /usr/lib/fr24 && cp dump1090 /usr/lib/fr24/ && cp -r public_html /usr/lib/fr24/
 COPY config.js /usr/lib/fr24/public_html/
